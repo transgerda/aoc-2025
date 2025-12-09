@@ -8,15 +8,9 @@ stream.on('data', function (chunk) {
     input.forEach(item => {
         const [ start, end ] = item.split('-');
 
-        for (i = parseInt(start); i <= parseInt(end); i++) {
-            const id = i.toString();
-
-            const firstHalf = id.slice(0, id.length/2);
-            const secondHalf = id.slice(id.length/2);
-        
-            if (firstHalf == secondHalf)
+        for (i = parseInt(start); i <= parseInt(end); i++)
+            if (i.toString().match(/^(\d+)\1+$/))
                 sum += i;
-        }
     })
 
     console.log('Answer:', sum);
