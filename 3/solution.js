@@ -2,8 +2,7 @@ const fs = require('fs');
 const stream = fs.createReadStream('./input.txt');
 
 stream.on('data', function (chunk) {
-    //const input = chunk.toString().split('\n');
-    //const input = ['987654321111111']
+    const input = chunk.toString().split('\n');
     let sum = 0;
 
     input.forEach(item => {
@@ -14,19 +13,19 @@ stream.on('data', function (chunk) {
         joltages.forEach((joltage, index) => {
             joltage = parseInt(joltage);
 
-            if (joltage > first && index != joltages.length-1) {
+            if (joltage > first && second <= first && index != joltages.length-1) {
                 first = joltage;
                 second = 0;
             } else if (joltage > second && first > second) {
                 second = joltage
+            } else if (joltage > second && index == joltages.length-1) {
+                second = joltage;
             }
         })
 
-        console.log(first,second);
         sum += parseInt(first.toString() + second.toString());
     })
 
-    console.log(input.length);
     console.log('Answer:', sum);
 });
 
