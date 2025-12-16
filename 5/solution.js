@@ -9,11 +9,14 @@ stream.on('data', function (chunk) {
     ids = ids.split('\n');
 
     for (const id of ids) {
+        let found = false;
         for (const range of ranges) {
             const [start, end] = range.split('-');
+            if (found) continue;
 
             if (id >= parseInt(start) && id <= parseInt(end)) {
                 answer++;
+                found = true;
             }
         }
     }
